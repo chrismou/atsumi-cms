@@ -1,0 +1,487 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Name: cms_content_schema_id_seq; Type: SEQUENCE; Schema: public; Owner: phoenix
+--
+
+CREATE SEQUENCE cms_content_schema_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cms_content_schema_id_seq OWNER TO phoenix;
+
+--
+-- Name: cms_content_schema_id_seq; Type: SEQUENCE SET; Schema: public; Owner: phoenix
+--
+
+SELECT pg_catalog.setval('cms_content_schema_id_seq', 1, false);
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: cms_content_schema; Type: TABLE; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+CREATE TABLE cms_content_schema (
+    id integer DEFAULT nextval('cms_content_schema_id_seq'::regclass) NOT NULL,
+    title character varying NOT NULL,
+    token character varying NOT NULL,
+    description text
+);
+
+
+ALTER TABLE public.cms_content_schema OWNER TO phoenix;
+
+--
+-- Name: cms_content_schema_field_id_seq; Type: SEQUENCE; Schema: public; Owner: phoenix
+--
+
+CREATE SEQUENCE cms_content_schema_field_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cms_content_schema_field_id_seq OWNER TO phoenix;
+
+--
+-- Name: cms_content_schema_field_id_seq; Type: SEQUENCE SET; Schema: public; Owner: phoenix
+--
+
+SELECT pg_catalog.setval('cms_content_schema_field_id_seq', 1, false);
+
+
+--
+-- Name: cms_content_schema_field; Type: TABLE; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+CREATE TABLE cms_content_schema_field (
+    id integer DEFAULT nextval('cms_content_schema_field_id_seq'::regclass) NOT NULL,
+    schema_field_type_id integer NOT NULL,
+    title character varying NOT NULL,
+    description text,
+    default_value text
+);
+
+
+ALTER TABLE public.cms_content_schema_field OWNER TO phoenix;
+
+--
+-- Name: cms_content_schema_field_validate_id_seq; Type: SEQUENCE; Schema: public; Owner: phoenix
+--
+
+CREATE SEQUENCE cms_content_schema_field_validate_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cms_content_schema_field_validate_id_seq OWNER TO phoenix;
+
+--
+-- Name: cms_content_schema_field_validate_id_seq; Type: SEQUENCE SET; Schema: public; Owner: phoenix
+--
+
+SELECT pg_catalog.setval('cms_content_schema_field_validate_id_seq', 1, false);
+
+
+--
+-- Name: cms_content_schema_field_to_validator; Type: TABLE; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+CREATE TABLE cms_content_schema_field_to_validator (
+    id integer DEFAULT nextval('cms_content_schema_field_validate_id_seq'::regclass) NOT NULL,
+    field_id integer NOT NULL,
+    validator_id integer NOT NULL
+);
+
+
+ALTER TABLE public.cms_content_schema_field_to_validator OWNER TO phoenix;
+
+--
+-- Name: cms_content_schema_field_type_id_seq; Type: SEQUENCE; Schema: public; Owner: phoenix
+--
+
+CREATE SEQUENCE cms_content_schema_field_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cms_content_schema_field_type_id_seq OWNER TO phoenix;
+
+--
+-- Name: cms_content_schema_field_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: phoenix
+--
+
+SELECT pg_catalog.setval('cms_content_schema_field_type_id_seq', 1, false);
+
+
+--
+-- Name: cms_content_schema_field_type; Type: TABLE; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+CREATE TABLE cms_content_schema_field_type (
+    id integer DEFAULT nextval('cms_content_schema_field_type_id_seq'::regclass) NOT NULL,
+    title character varying NOT NULL,
+    widget_token character varying NOT NULL,
+    options text
+);
+
+
+ALTER TABLE public.cms_content_schema_field_type OWNER TO phoenix;
+
+--
+-- Name: cms_content_schema_field_validator_id_seq; Type: SEQUENCE; Schema: public; Owner: phoenix
+--
+
+CREATE SEQUENCE cms_content_schema_field_validator_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cms_content_schema_field_validator_id_seq OWNER TO phoenix;
+
+--
+-- Name: cms_content_schema_field_validator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: phoenix
+--
+
+SELECT pg_catalog.setval('cms_content_schema_field_validator_id_seq', 1, false);
+
+
+--
+-- Name: cms_content_schema_field_validator; Type: TABLE; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+CREATE TABLE cms_content_schema_field_validator (
+    id integer DEFAULT nextval('cms_content_schema_field_validator_id_seq'::regclass) NOT NULL,
+    title character varying NOT NULL,
+    description text,
+    validator_token character varying NOT NULL,
+    options text
+);
+
+
+ALTER TABLE public.cms_content_schema_field_validator OWNER TO phoenix;
+
+--
+-- Name: cms_content_schema_to_field_id_seq; Type: SEQUENCE; Schema: public; Owner: phoenix
+--
+
+CREATE SEQUENCE cms_content_schema_to_field_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cms_content_schema_to_field_id_seq OWNER TO phoenix;
+
+--
+-- Name: cms_content_schema_to_field_id_seq; Type: SEQUENCE SET; Schema: public; Owner: phoenix
+--
+
+SELECT pg_catalog.setval('cms_content_schema_to_field_id_seq', 1, false);
+
+
+--
+-- Name: cms_content_schema_to_field; Type: TABLE; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+CREATE TABLE cms_content_schema_to_field (
+    id integer DEFAULT nextval('cms_content_schema_to_field_id_seq'::regclass) NOT NULL,
+    schema_id integer NOT NULL,
+    field_id integer NOT NULL
+);
+
+
+ALTER TABLE public.cms_content_schema_to_field OWNER TO phoenix;
+
+--
+-- Name: cms_content_type_list_id_seq; Type: SEQUENCE; Schema: public; Owner: phoenix
+--
+
+CREATE SEQUENCE cms_content_type_list_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cms_content_type_list_id_seq OWNER TO phoenix;
+
+--
+-- Name: cms_content_type_list_id_seq; Type: SEQUENCE SET; Schema: public; Owner: phoenix
+--
+
+SELECT pg_catalog.setval('cms_content_type_list_id_seq', 1, false);
+
+
+--
+-- Name: cms_content_type_list; Type: TABLE; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+CREATE TABLE cms_content_type_list (
+    id integer DEFAULT nextval('cms_content_type_list_id_seq'::regclass) NOT NULL,
+    token character varying NOT NULL,
+    description text
+);
+
+
+ALTER TABLE public.cms_content_type_list OWNER TO phoenix;
+
+--
+-- Name: crm_user_id_seq; Type: SEQUENCE; Schema: public; Owner: phoenix
+--
+
+CREATE SEQUENCE crm_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.crm_user_id_seq OWNER TO phoenix;
+
+--
+-- Name: crm_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: phoenix
+--
+
+SELECT pg_catalog.setval('crm_user_id_seq', 1, false);
+
+
+--
+-- Name: cms_user; Type: TABLE; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+CREATE TABLE cms_user (
+    id integer DEFAULT nextval('crm_user_id_seq'::regclass) NOT NULL,
+    username character varying NOT NULL,
+    user_pass character varying NOT NULL,
+    fullname character varying NOT NULL,
+    created timestamp with time zone
+);
+
+
+ALTER TABLE public.cms_user OWNER TO phoenix;
+
+--
+-- Data for Name: cms_content_schema; Type: TABLE DATA; Schema: public; Owner: phoenix
+--
+
+COPY cms_content_schema (id, title, token, description) FROM stdin;
+\.
+
+
+--
+-- Data for Name: cms_content_schema_field; Type: TABLE DATA; Schema: public; Owner: phoenix
+--
+
+COPY cms_content_schema_field (id, schema_field_type_id, title, description, default_value) FROM stdin;
+\.
+
+
+--
+-- Data for Name: cms_content_schema_field_to_validator; Type: TABLE DATA; Schema: public; Owner: phoenix
+--
+
+COPY cms_content_schema_field_to_validator (id, field_id, validator_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: cms_content_schema_field_type; Type: TABLE DATA; Schema: public; Owner: phoenix
+--
+
+COPY cms_content_schema_field_type (id, title, widget_token, options) FROM stdin;
+\.
+
+
+--
+-- Data for Name: cms_content_schema_field_validator; Type: TABLE DATA; Schema: public; Owner: phoenix
+--
+
+COPY cms_content_schema_field_validator (id, title, description, validator_token, options) FROM stdin;
+\.
+
+
+--
+-- Data for Name: cms_content_schema_to_field; Type: TABLE DATA; Schema: public; Owner: phoenix
+--
+
+COPY cms_content_schema_to_field (id, schema_id, field_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: cms_content_type_list; Type: TABLE DATA; Schema: public; Owner: phoenix
+--
+
+COPY cms_content_type_list (id, token, description) FROM stdin;
+\.
+
+
+--
+-- Data for Name: cms_user; Type: TABLE DATA; Schema: public; Owner: phoenix
+--
+
+COPY cms_user (id, username, user_pass, fullname, created) FROM stdin;
+\.
+
+
+--
+-- Name: cms_content_schema_field_pkey; Type: CONSTRAINT; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+ALTER TABLE ONLY cms_content_schema_field
+    ADD CONSTRAINT cms_content_schema_field_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cms_content_schema_field_type_pkey; Type: CONSTRAINT; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+ALTER TABLE ONLY cms_content_schema_field_type
+    ADD CONSTRAINT cms_content_schema_field_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cms_content_schema_field_validate_field_id_key; Type: CONSTRAINT; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+ALTER TABLE ONLY cms_content_schema_field_to_validator
+    ADD CONSTRAINT cms_content_schema_field_validate_field_id_key UNIQUE (field_id, validator_id);
+
+
+--
+-- Name: cms_content_schema_field_validator_pkey; Type: CONSTRAINT; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+ALTER TABLE ONLY cms_content_schema_field_validator
+    ADD CONSTRAINT cms_content_schema_field_validator_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cms_content_schema_pkey; Type: CONSTRAINT; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+ALTER TABLE ONLY cms_content_schema
+    ADD CONSTRAINT cms_content_schema_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cms_content_schema_to_field_pkey; Type: CONSTRAINT; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+ALTER TABLE ONLY cms_content_schema_to_field
+    ADD CONSTRAINT cms_content_schema_to_field_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cms_content_schema_to_field_schema_id_key; Type: CONSTRAINT; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+ALTER TABLE ONLY cms_content_schema_to_field
+    ADD CONSTRAINT cms_content_schema_to_field_schema_id_key UNIQUE (schema_id, field_id);
+
+
+--
+-- Name: cms_content_type_list_pkey; Type: CONSTRAINT; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+ALTER TABLE ONLY cms_content_type_list
+    ADD CONSTRAINT cms_content_type_list_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cms_content_type_list_token_key; Type: CONSTRAINT; Schema: public; Owner: phoenix; Tablespace: 
+--
+
+ALTER TABLE ONLY cms_content_type_list
+    ADD CONSTRAINT cms_content_type_list_token_key UNIQUE (token);
+
+
+--
+-- Name: cms_content_schema_field_schema_field_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: phoenix
+--
+
+ALTER TABLE ONLY cms_content_schema_field
+    ADD CONSTRAINT cms_content_schema_field_schema_field_type_id_fkey FOREIGN KEY (schema_field_type_id) REFERENCES cms_content_schema_field_type(id);
+
+
+--
+-- Name: cms_content_schema_field_validate_field_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: phoenix
+--
+
+ALTER TABLE ONLY cms_content_schema_field_to_validator
+    ADD CONSTRAINT cms_content_schema_field_validate_field_id_fkey FOREIGN KEY (field_id) REFERENCES cms_content_schema_field(id);
+
+
+--
+-- Name: cms_content_schema_field_validate_validator_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: phoenix
+--
+
+ALTER TABLE ONLY cms_content_schema_field_to_validator
+    ADD CONSTRAINT cms_content_schema_field_validate_validator_id_fkey FOREIGN KEY (validator_id) REFERENCES cms_content_schema_field_validator(id);
+
+
+--
+-- Name: cms_content_schema_to_field_field_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: phoenix
+--
+
+ALTER TABLE ONLY cms_content_schema_to_field
+    ADD CONSTRAINT cms_content_schema_to_field_field_id_fkey FOREIGN KEY (field_id) REFERENCES cms_content_schema_field(id);
+
+
+--
+-- Name: cms_content_schema_to_field_schema_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: phoenix
+--
+
+ALTER TABLE ONLY cms_content_schema_to_field
+    ADD CONSTRAINT cms_content_schema_to_field_schema_id_fkey FOREIGN KEY (schema_id) REFERENCES cms_content_schema(id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
