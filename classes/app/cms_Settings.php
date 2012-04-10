@@ -5,15 +5,15 @@ class cms_Settings extends atsumi_AbstractAppSettings {
 			'siteName'	=> 'My Atsumi powered website!',
 			'debug'		=> true,
 			// Database Settings
-			'dbName'	=> 'cms_test',
+			'dbName'	=> '******',
 			'dbPort'	=> '5432',
-			'dbUser'	=> 'phoenix',
-			'dbPassword'	=> 'dr74650',
+			'dbUser'	=> '****************',
+			'dbPassword'	=> '****************',
 			'dbHost'	=> '127.0.0.1',
 			// Path Settings
-			'basePath'	=> '/www/jonstirling.co.uk/cms/',
-			'logPath'	=> '/www/jonstirling.co.uk/cms/log/',
-			'imagePath'	=> '/www/jonstirling.co.uk/cms/data/img/'
+			'basePath'	=> '',
+			'logPath'	=> '',
+			'imagePath'	=> ''
 
 				);
 	/* 	At times you may want to utilise the construct, this could be to 
