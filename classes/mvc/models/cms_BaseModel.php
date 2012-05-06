@@ -1,7 +1,7 @@
 <?php
 /* START AUTO */
-class cms_BaseModel {
-
+abstract class cms_BaseModel {
+	protected $table;
 	public function __call($name, $args) {
 		$action = substr($name, 0, 3);
 		// Assume camel case
@@ -22,13 +22,25 @@ class cms_BaseModel {
 					return true;
 				}
 				break;
-			case default:
+			default:
 				throw new Exception('Missing call actions');
 		}
 	}
 
+	public static function loadAll($db, $order = null, $limit = null, $offset = null) {
+		$data = $db->fetch('*', self::$table, null, $order, $offset, $limit);
+
+		if(!$data) { return false; }
+
+		$returnArray = array();
+		foreach($data as $item) {
+			$returnData[] = self::loadFromSqlRow($item);
+		}
+		return $returnData;
+	}
+
 	abstract public static function write($db, $object);
-	abstract private static function loadFromSqlRow($row);
+	abstract protected static function loadFromSqlRow($row);
 	
 
 /* FINISH AUTO */

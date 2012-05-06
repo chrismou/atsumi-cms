@@ -27,7 +27,10 @@ class cms_Settings extends atsumi_AbstractAppSettings {
 	public function init_specification () {
 		return array (	
 			''	=> 'cms_FrontPageController',
-			'ajax'	=> 'cms_AjaxController'
+			'ajax'	=> 'cms_AjaxController',
+			'admin'	=> array(
+				'content-types' => 'cms_AdminContentTypesController'
+			)
 		);
 	}
 
